@@ -7,17 +7,17 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using Twitter.Consumer.Api.Features.Shared;
-using Twitter.Consumer.Api.Features.Tweets.Context;
+using Twitter.Consumer.Api.Features.ReplyTweet.Context;
 using Twitter.Consumer.Ports.Models;
 using Twitter.Consumer.Ports.Shared;
 using static System.Net.HttpStatusCode;
 
-namespace Twitter.Consumer.Api.Features.Tweets.Bindings
+namespace Twitter.Consumer.Api.Features.ReplyTweet.Bindings
 {
-    [Binding, Scope(Tag = "ApiV1")]
-    public class BatchTweetSteps : BatchTweetContext
+    [Binding, Scope(Tag = "ApiV2")]
+    public class ReplyToTweetSteps : ReplyToTweetContext
     {
-        public BatchTweetSteps(ScenarioContext context, ApiServer server) : base(context, server) { }
+        public ReplyToTweetSteps(ScenarioContext context, ApiServer server) : base(context, server) { }
 
         [Given("Je peux interroger l'api de Twitter")]
         public void GivenJePeuxInterrogerLApiDeTwitter() { }
@@ -37,7 +37,7 @@ namespace Twitter.Consumer.Api.Features.Tweets.Bindings
         [Given("Je veux consulter un simple tweet")]
         public void GivenJeVeuxConsulterUnSimpleTweet()
         {
-            Route = "/api/v1/tweet/";
+            Route = "/api/v2/tweet/";
         }
 
         [When("Je demande le tweet (.*)")]
@@ -66,5 +66,11 @@ namespace Twitter.Consumer.Api.Features.Tweets.Bindings
 
         [Then("Je recois une réponse non trouvé")]
         public void ThenJeRecoisUneReponseNonTrouve() => Response.StatusCode.Should().Be(NotFound);
+
+        [Then("Je ne peux pas répondre")]
+        public void ThenJeNePeuxPasRepondre()
+        {
+            Pending();
+        }
     }
 }

@@ -13,6 +13,7 @@ namespace Twitter.Consumer.Api.SwaggerHelper
             => services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Twitter.Consumer.Api", Version = "v1" });
+                c.SwaggerDoc("v2", new OpenApiInfo { Title = "Twitter.Consumer.Api", Version = "v2" });
                 c.OperationFilter<SwaggerParameterFilters>();
                 c.DocumentFilter<SwaggerVersionMapping>();
 
