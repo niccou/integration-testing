@@ -1,3 +1,4 @@
+@ApiV1
 Feature: Je veux pouvoir lire des tweets depuis mon application
     Afin de comprendre comment intéragir avec l'api de Twitter,
     je vais écrire les fonctionnalités attendues
@@ -13,3 +14,8 @@ Scenario: Je veux un simple tweet
     When Je demande le tweet 20
     Then Je recois une réponse
     Then Je peux consulter le message du tweet : just setting up my twttr
+
+Scenario: Je demande un tweet inexistant
+    Given Je veux consulter un simple tweet
+    When Je demande le tweet 999
+    Then Je recois une réponse non trouvé

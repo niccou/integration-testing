@@ -1,10 +1,15 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Linq;
 using Twitter.Consumer.Api.SwaggerHelper;
+using Twitter.Consumer.Core.Configuration;
+using Twitter.Consumer.Ports.Configuration;
 
 namespace Twitter.Consumer.Api
 {
@@ -20,6 +25,7 @@ namespace Twitter.Consumer.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpClient();
             services.AddControllers();
 
             services.AddApiVersioning(config =>
@@ -30,6 +36,11 @@ namespace Twitter.Consumer.Api
             });
 
             services.AddSwaggerConfiguration();
+
+            services
+                .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
+                .AddCoreConfiguration()
+                .AddPortsConfiguration();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

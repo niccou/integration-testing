@@ -52,19 +52,19 @@ namespace Twitter.Consumer.Api.Features.Tweets.Bindings
         }
 
         [Then("Je recois une réponse")]
-        public async Task ThenJeRecoisUneReponse()
-        {
-            Response.StatusCode.Should().Be(OK);
+        public void ThenJeRecoisUneReponse() => Response.StatusCode.Should().Be(OK);
 
+        [Then("Je peux consulter le message du tweet : (.*)")]
+        public async Task ThenJePeuxConsulterLeMessageDuTweet(string expectedMessage)
+        {
             var content = await Response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
             TweetReceived = content.Deserialize<Models.Tweet>();
-        }
 
-        [Then("Je peux consulter le message du tweet : (.*)")]
-        public void ThenJePeuxConsulterLeMessageDuTweet(string expectedMessage)
-        {
             TweetReceived.Message.Should().Be(expectedMessage);
         }
+
+        [Then("Je recois une réponse non trouvé")]
+        public void ThenJeRecoisUneReponseNonTrouve() => Response.StatusCode.Should().Be(NotFound);
     }
 }
