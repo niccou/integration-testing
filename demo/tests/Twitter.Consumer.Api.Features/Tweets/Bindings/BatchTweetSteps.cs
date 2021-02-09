@@ -64,7 +64,7 @@ namespace Twitter.Consumer.Api.Features.Tweets.Bindings
             TweetReceived.Message.Should().Be(expectedMessage);
         }
 
-        [Then("Je recois une réponse non trouvé")]
+        [Then("Je recois une réponse : tweet non trouvé")]
         public void ThenJeRecoisUneReponseNonTrouve() => Response.StatusCode.Should().Be(NotFound);
     }
 }
